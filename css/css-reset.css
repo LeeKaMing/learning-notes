@@ -1,0 +1,149 @@
+@charset "utf-8";
+
+html {
+  color: #000;
+  background: #2f343b;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+em,
+strong,
+b,
+u,
+i {
+  font-style: normal;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  *font-size: 100%; /*to enable resizing for IE*/
+}
+
+img {
+  border: 0 none;
+}
+
+input {
+  border: none;
+}
+
+html,
+body,
+p,
+h1,
+h2,
+h3,
+img,
+input,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+input,
+img {
+  border: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+body {
+  font: normal normal 12px;
+  background-color: white;
+}
+
+h1,
+h2,
+h3,
+strong,
+b {
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3 {
+  font-size: 12px;
+}
+
+.clearfix:after {
+  content: '';
+  height: 0;
+  line-height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.bb {
+  box-sizing: border-box;
+}
