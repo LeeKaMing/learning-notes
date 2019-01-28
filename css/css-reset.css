@@ -123,7 +123,7 @@ h3 {
   font-size: 12px;
 }
 
-.clearfix:after {
+.clearfix::after {
   content: '';
   height: 0;
   line-height: 0;
