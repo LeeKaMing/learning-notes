@@ -1,3 +1,5 @@
 # learning-notes
 
-created at 20190125 😆
+keep calm and carry on
+
+功不唐捐
