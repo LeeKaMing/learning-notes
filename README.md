@@ -1,5 +1,5 @@
 # learning-notes
 
-keep calm and carry on
+The more you learn, the less you know.
 
 功不唐捐
