@@ -1,10 +1,9 @@
-import retry from './retry'
 
 const ANDROID_NAV_BAR_BASE_HEIGHT = 48
 const IOS_NAV_BAR_BASE_HEIGHT = 44
 const IOS_STATUS_BAR_HEIGHT = 20
 
-const getSystemInfo = retry(() => wx.getSystemInfoSync())
+const getSystemInfo = wx.getSystemInfoSync()
 
 export default {
   getSystemInfo,
