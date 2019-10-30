@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://cdn.bootcss.com/xlsx/0.15.1/xlsx.full.min.js"></script>
+    <script src="./download.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <table id="table">
+      <thead>
+        <tr>
+          <th>标题 1</th>
+          <th>标题 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>内容 1</td>
+          <td>内容 2</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+
+  <script>
+
+    let aoa = [
+      ['主要信息', null, null, '其它信息'],
+      ['姓名', '性别', '年龄', '注册时间'],
+      ['张三', '男', 18, new Date()],
+      ['李四', '女', 22, new Date()]
+    ];
+    let testObj = [
+      {aaa: '123', bbb: '456'},
+      {ccc: '798', ddd: '999'},
+    ]
+    // let sheet = XLSX.utils.aoa_to_sheet(aoa)
+    // sheet['!merges'] = [
+    //   // 设置A1-C1的单元格合并
+    //   {s: {r: 0, c: 0}, e: {r: 0, c: 2}}
+    // ]
+    // let sheet = XLSX.utils.table_to_sheet(document.getElementById('table'))
+    // let sheet = XLSX.utils.json_to_sheet(testObj)
+    // console.log(sheet)
+    // openDownloadDialog(sheet2blob(sheet), '导出.xlsx')
+
+    var doc = new jsPDF();
+    doc.text('Hello world!', 10, 10);
+    doc.save('a4.pdf');
+
+
+  </script>
+</html>
