@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      img {
+        display: block;
+        width: 800px;
+        height: 600px;
+        margin: 80px;
+      }
+
+      .container {
+        width: 100vw;
+        height: 100vh;
+        border: 1px solid red;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="xxx.png"
+        data-src="https://cloud-minapp-30347.cloud.ifanrusercontent.com/1iAQM7eQX30pQN9g.png"
+      />
+      <img
+        src="xxx.png"
+        data-src="https://cloud-minapp-30347.cloud.ifanrusercontent.com/1iAQM7eQX30pQN9g.png"
+      />
+      <img
+        src="xxx.png"
+        data-src="https://cloud-minapp-30347.cloud.ifanrusercontent.com/1iAQM7eQX30pQN9g.png"
+      />
+      <img
+        src="xxx.png"
+        data-src="https://cloud-minapp-30347.cloud.ifanrusercontent.com/1iAQM7eQX30pQN9g.png"
+      />
+      <img
+        src="xxx.png"
+        data-src="https://cloud-minapp-30347.cloud.ifanrusercontent.com/1iAQM7eQX30pQN9g.png"
+      />
+      <img
+        src="xxx.png"
+        data-src="https://cloud-minapp-30347.cloud.ifanrusercontent.com/1iAQM7eQX30pQN9g.png"
+      />
+      <img
+        src="xxx.png"
+        data-src="https://cloud-minapp-30347.cloud.ifanrusercontent.com/1iAQM7eQX30pQN9g.png"
+      />
+    </div>
+  </body>
+
+  <script>
+    let observer = new IntersectionObserver(
+      (entries, observer) => {
+        console.log(entries)
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.src = entry.target.dataset.src
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        root: document.querySelector('.container'),
+        rootMargin: '0px 0px -150px 0px'
+      }
+    )
+
+    document.querySelectorAll('img').forEach(img => {
+      observer.observe(img)
+    })
+  </script>
+</html>

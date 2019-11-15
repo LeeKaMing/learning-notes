@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+      #heart {
+        width: 1280px;
+        height: 720px;
+        margin: 100px auto 0px;
+        border: 1px solid #666;
+        position: relative;
+        background: url('Landscape%201.png') repeat-x;
+        background-position: 0px -500px;
+        animation-name: bgFlow;
+        animation-duration: 10s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+
+        overflow: hidden;
+      }
+      /*背景图滚动*/
+      @keyframes bgFlow {
+        0% {
+          background-position: 0px -500px;
+        }
+        100% {
+          background-position: -2560px -500px;
+        }
+      }
+      #bird {
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+        box-sizing: border-box;
+        border: 3px solid #333;
+        background-color: yellow;
+        position: absolute;
+        left: 200px;
+        top: 50px;
+      }
+      #start {
+        width: 100px;
+        height: 60px;
+        display: inline-block;
+        background-color: #2ab561;
+        font-family: '微软雅黑';
+        line-height: 60px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        color: yellow;
+      }
+      #startBlock {
+        width: 640px;
+        height: 320px;
+        margin: 200px auto;
+        background-color: rgba(240, 240, 240, 0.8);
+        display: block;
+      }
+      #startBlock p {
+        color: #cc9900;
+        font-family: 微软雅黑;
+        font-weight: bold;
+        font-size: 64px;
+        line-height: 320px;
+        text-align: center;
+      }
+      #score {
+        display: inline-block;
+        width: 200px;
+        height: 50px;
+        box-sizing: border-box;
+        background-color: #fff741;
+        font-family: '微软雅黑';
+        font-size: 32px;
+        font-weight: bold;
+        line-height: 50px;
+        text-align: center;
+        color: orangered;
+      }
+      #restart {
+        width: 100px;
+        height: 60px;
+        display: inline-block;
+        background-color: #2ab561;
+        font-family: '微软雅黑';
+        line-height: 60px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        color: yellow;
+      }
+      #restart:visited {
+        color: yellow;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="heart">
+      <span id="bird"></span>
+      <div id="startBlock"><p>Flappy Point ?</p></div>
+    </div>
+    <span id="start">开始游戏！</span>
+    <a href="Flappy%20Point.html" id="restart">重新开始！</a>
+    <span id="score">SCORE: 00</span>
+
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+      var t
+      var t2
+      var t3
+      var t4
+      var blockHigh
+      var blockHigh2
+      var blockJianxi
+      var score = 0
+      $(function() {
+        //点击开始按钮事件：
+        $('#start').click(function() {
+          //点击开始，隐藏按钮、标题块
+          $('#startBlock').css({
+            display: 'none',
+          })
+          $('#start').css({
+            display: 'none',
+          })
+          //小鸟动画开始
+          $('#bird').animate(
+            {
+              top: '680px',
+            },
+            2000
+          )
+
+          //实时判断span2的位置坐标
+          t2 = setInterval(function() {
+            var $span2x = $('#heart')
+              .children('span')
+              .eq(1)
+              .position().left
+            if ($span2x <= -39) {
+              $('#heart')
+                .children('span')
+                .eq(2)
+                .remove()
+              $('#heart')
+                .children('span')
+                .eq(1)
+                .remove()
+              score++
+              $('#score').text('SCORE: ' + score)
+            }
+          }, 100)
+
+          //判断小鸟触底
+          t3 = setInterval(function() {
+            var $birdyy = $('#bird').position().top
+            if ($birdyy >= 679) {
+              $('#bird').stop()
+              alert('Oopsss! Your bird go die !')
+              clearInterval(t3)
+              clearInterval(t2)
+              clearInterval(t4)
+              clearInterval(t)
+              $('#heart').off('click')
+            }
+          }, 1)
+
+          //判断小鸟撞墙
+          t4 = setInterval(function() {
+            var $spanXX = $('#heart')
+              .children('span')
+              .eq(1)
+              .position().left
+            if ($spanXX < 240 && $spanXX > 160) {
+              var $birdYY = $('#bird').position().top
+              var $span3Y = $('#heart')
+                .children('span')
+                .eq(2)
+                .position().top //获取下墙的高度
+              var $span2Y = $('#heart')
+                .children('span')
+                .eq(1)
+                .height() //获取上墙的高度
+              if ($birdYY <= $span2Y || $birdYY >= $span3Y - 40) {
+                $('#bird').stop()
+                alert('Oopsss! Your bird go die !')
+                clearInterval(t4)
+                clearInterval(t3)
+                clearInterval(t2)
+                clearInterval(t)
+                $('#heart').off('click')
+              }
+            }
+          }, 1)
+
+          //第一次生成障碍物
+          blockHigh = Math.floor(Math.random() * 520)
+          blockJianxi = Math.floor(Math.random() * 100) + 200
+          blockHigh2 = 720 - blockHigh - blockJianxi
+          var $block = $('<span></span>')
+          var $block2 = $('<span></span>')
+          $block.css({
+            width: '40px',
+            height: blockHigh,
+            display: 'inline-block',
+            boxSizing: 'border-box',
+            border: '3px solid #333',
+            backgroundColor: '#394057',
+            position: 'absolute',
+            left: '1280px',
+            top: '0px',
+          })
+          $block2.css({
+            width: '40px',
+            height: blockHigh2,
+            display: 'inline-block',
+            boxSizing: 'border-box',
+            border: '3px solid #333',
+            backgroundColor: '#394057',
+            position: 'absolute',
+            left: '1280px',
+            bottom: '0px',
+          })
+          $('#heart').append($block)
+          $('#heart').append($block2)
+          $block.animate(
+            {
+              left: '-40px',
+            },
+            5000
+          )
+          $block2.animate(
+            {
+              left: '-40px',
+            },
+            5000
+          )
+
+          //每隔5秒生成一次障碍物
+          t = setInterval(function() {
+            blockHigh = Math.floor(Math.random() * 520)
+            blockJianxi = Math.floor(Math.random() * 100) + 100
+            blockHigh2 = 720 - blockHigh - blockJianxi
+            var $block = $('<span></span>')
+            var $block2 = $('<span></span>')
+            $block.css({
+              width: '40px',
+              height: blockHigh,
+              display: 'inline-block',
+              boxSizing: 'border-box',
+              border: '3px solid #333',
+              backgroundColor: '#394057',
+              position: 'absolute',
+              left: '1280px',
+              top: '0px',
+            })
+            $block2.css({
+              width: '40px',
+              height: blockHigh2,
+              display: 'inline-block',
+              boxSizing: 'border-box',
+              border: '3px solid #333',
+              backgroundColor: '#394057',
+              position: 'absolute',
+              left: '1280px',
+              bottom: '0px',
+            })
+            $('#heart').append($block)
+            $('#heart').append($block2)
+            $block.animate(
+              {
+                left: '-40px',
+              },
+              5000
+            )
+            $block2.animate(
+              {
+                left: '-40px',
+              },
+              5000
+            )
+          }, 2500)
+        })
+
+        //点击游戏画面事件：
+        $('#heart').click(function() {
+          var gaoDu = $('#bird').position().top
+          if (gaoDu <= 80) {
+            gaoDu = 0
+          } else {
+            gaoDu = gaoDu - 80
+          }
+          $('#bird')
+            .stop(true, false)
+            .animate(
+              {
+                top: gaoDu,
+              },
+              400
+            )
+          $('#bird').animate(
+            {
+              top: '680px',
+            },
+            2000
+          )
+        })
+      })
+    </script>
+  </body>
+</html>
